@@ -14,7 +14,7 @@ async function getLinks() {
 
   let $ = cheerio.load(data)
 
-  let tables = Array.from($('table.toccolours'))
+  let tables = Array.from($('wikitable'))
 
   return tables.map(table => {
     let rows = Array.from($('tr', table)).slice(1)
@@ -33,7 +33,7 @@ async function fetchURL(url, buses) {
 
   let $ = cheerio.load(data)
 
-  let tables = Array.from($('table.toccolours'))
+  let tables = Array.from($('wikitable'))
   await async.forEach(tables, async table => {
     let header = $('tr', table)[0]
     if ($(header).text().includes('served')) return
